@@ -1,8 +1,6 @@
-//
-// ./api/routes_v1.js
-//
+
 var express = require('express');
-var router = express.Router();
+var routes = express.Router();
 
 var mijnObject = { 
 	mijntekst: 'Hello World!',
@@ -14,16 +12,16 @@ var mijnObject = {
 	}
 };
 
-router.get('/hello', function(req, res){
-	res.status(200);
+routes.get('/hello', function(req, res){
 	res.contentType('application/json');
+	res.status(200);
 	res.json(mijnObject);
 });
 
-router.get('/goodbye', function(req, res){
+routes.get('/goodbye', function(req, res){
 	res.contentType('application/json');
 	res.status(200);
 	res.json({ 'tekst': 'Goodbye!'});
 });
 
-module.exports = router;
+module.exports = routes;

@@ -1,23 +1,30 @@
+//
 // dit is mijn server
+//
 var http = require('http');
+var express = require('express');
+var routes_v1 = require('./api/routes_v1');
+var routes_v2 = require('./api/routes_v2');
 
-function onRequest(request, response){
-	console.log('Er was een request.');
+var app = express();
 
-	var mijnObject = { 
-		mijntekst: 'Hello World!',
-		label: "Nog meer tekst",
-		mijnarray: [ "tekst", "nog meer tekst", 2 ],
-		mijnobject: {
-			mijnlabel: 'mijntekst',
-			getal: 4
-		}
-	};
+app.get('*', function(req, res, next){
+	console.log('Default URL afgehandeld');
+	next();
+});
 
-	response.writeHead(200, {'Content-Type': 'application/json'});
-	response.end(JSON.stringify(mijnObject));
-}
+app.use('/api/v1', routes_v1);
+app.use('/api/v2', routes_v2);
 
-http.createServer(onRequest).listen(process.env.PORT || 3000);
+app.get('*', function(req, res){
+	console.log('Error URL afgehandeld');
+	res.status(401);
+	res.contentType('application/json');
+	res.json({ error: 'Deze URL bestaat niet!'});
+});
+
+app.listen(process.env.PORT || 3000);
 
 console.log('De server luistert op port 3000');
+
+module.exports = app;

@@ -7,7 +7,7 @@ var routes = express.Router();
 var mijnObject = { 
 	mijntekst: 'Hello World!',
 	label: "Nog meer tekst",
-	tekst: "alle tekst die er is + 1",
+	tekst: "alle tekst die er is en meer tekst!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
 	mijnarray: [ "tekst", "nog meer tekst", 2 ],
 	mijnobject: {
 		mijnlabel: 'mijntekst',
